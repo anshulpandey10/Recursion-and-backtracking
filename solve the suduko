@@ -1,0 +1,128 @@
+{
+    public:
+    bool findEmpty(int grid[9][9], int &row, int &col) {
+    
+    for(int i = 0; i < 9; i++) {
+        for(int j = 0; j < 9; j++) {
+            if(grid[i][j] == 0) {
+                row = i;
+                col = j;
+                return true;
+            }
+        }
+    }
+    return false;
+}
+
+
+bool isSafe(int grid[9][9], int row, int col, int num) {
+    for(int i = 0; i < 9; i++) {
+        if(grid[row][i] == num) return false;
+    }
+    
+    for(int i = 0; i < 9; i++) {
+        if(grid[i][col] == num) return false;
+    }
+    
+    if(row < 3 && col < 3) {
+        for(int i = 0; i < 3; i++) {
+            for(int j = 0; j < 3; j++) {
+                if(grid[i][j] == num) return false;
+            }
+        }
+    }
+    
+    else if(row < 3 && col < 6) {
+        for(int i = 0; i < 3; i++) {
+            for(int j = 3; j < 6; j++) {
+                if(grid[i][j] == num) return false;
+            }
+        }
+    }
+    
+    else if(row < 3 && col < 9) {
+        for(int i = 0; i < 3; i++) {
+            for(int j = 6; j < 9; j++) {
+                if(grid[i][j] == num) return false;
+            }
+        }
+    }
+    
+    else if(row < 6 && col < 3) {
+        for(int i = 3; i < 6; i++) {
+            for(int j = 0; j < 3; j++) {
+                if(grid[i][j] == num) return false;
+            }
+        }
+    }
+    
+    else if(row < 6 && col < 6) {
+        for(int i = 3; i < 6; i++) {
+            for(int j = 3; j < 6; j++) {
+                if(grid[i][j] == num) return false;
+            }
+        }
+    }
+    
+    else if(row < 6 && col < 9) {
+        for(int i = 3; i < 6; i++) {
+            for(int j = 6; j < 9; j++) {
+                if(grid[i][j] == num) return false;
+            }
+        }
+    }
+    
+    else if(row < 9 && col < 3) {
+        for(int i = 6; i < 9; i++) {
+            for(int j = 0; j < 3; j++) {
+                if(grid[i][j] == num) return false;
+            }
+        }
+    }
+    
+    else if(row < 9 && col < 6) {
+        for(int i = 6; i < 9; i++) {
+            for(int j = 3; j < 6; j++) {
+                if(grid[i][j] == num) return false;
+            }
+        }
+    }
+    
+    else if(row < 9 && col < 9) {
+        for(int i = 6; i < 9; i++) {
+            for(int j = 6; j < 9; j++) {
+                if(grid[i][j] == num) return false;
+            }
+        }
+    }
+    return true;
+}
+
+    bool SolveSudoku(int grid[N][N])  
+    { 
+        int row, col;
+        if(!findEmpty(grid, row, col)) {
+            return true;
+        }
+        
+        for(int i = 1; i <= 9; i++) {
+            if(isSafe(grid, row, col, i)) {
+                grid[row][col] = i;
+                if(SolveSudoku(grid)) return true;
+                grid[row][col] = 0;
+            }
+        }
+        return false;
+    }
+    
+    
+    void printGrid (int grid[N][N]) 
+    {
+        for(int i = 0; i < N; i++) {
+            for(int j = 0; j < N; j++) {
+                cout << grid[i][j] << " ";
+            }
+            // cout << endl;
+        } 
+    }
+};
